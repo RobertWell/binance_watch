@@ -17,7 +17,7 @@ function Home() {
           <QuerySymbol
             symbol={symbolObj.symbol}
             setSymbol={changeSymbol}
-            allSymbols={allSymbols.map((d) => d.symbol)}
+            allSymbols={allSymbols.map((d) => d.symbol.toUpperCase())}
           />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>

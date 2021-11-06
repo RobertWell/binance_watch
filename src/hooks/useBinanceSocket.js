@@ -50,7 +50,6 @@ const updateAggTrades = (new_trade, trades, setAggTrades) => {
 const bindWs = (ws, trades, setAggTrades, setPBD) => {
   ws.onmessage = (e) => {
     let stockObj = JSON.parse(e.data);
-    // setWs(ws);
     // console.log(stockObj);
     if (stockObj.e === "aggTrade") {
       updateAggTrades(stockObj, trades, setAggTrades);
@@ -67,12 +66,12 @@ function useBinanceSocket(defaultSymbol, id = 1, depth_level = 10) {
   const [aggTrades, setAggTrades] = useState([]);
   const [pbd, setPBD] = useState({});
 
-//   const loading = useMemo(() => {
-//     return aggTrades.length && allSymbols.length;
-//   }, [aggTrades, allSymbols]);
+  //   const loading = useMemo(() => {
+  //     return aggTrades.length && allSymbols.length;
+  //   }, [aggTrades, allSymbols]);
 
-  const getInitialAggTrades = async () => {
-    return await getAggTrades(symbolObj.symbol);
+  const getInitialAggTrades = () => {
+    return getAggTrades(symbolObj.symbol);
   };
 
   useEffect(() => {
@@ -100,7 +99,7 @@ function useBinanceSocket(defaultSymbol, id = 1, depth_level = 10) {
 
   useEffect(async () => {
     setAggTrades([]);
-    setPBD({})
+    setPBD({});
     if (ws) {
       ws.onmessage = () => {};
       if (oldSymbol)
@@ -113,7 +112,6 @@ function useBinanceSocket(defaultSymbol, id = 1, depth_level = 10) {
       } catch (e) {
         console.log("------error", e);
       }
-
     }
   }, [symbolObj.symbol]);
 
@@ -141,7 +139,7 @@ function useBinanceSocket(defaultSymbol, id = 1, depth_level = 10) {
     // loading,
     updateAggTrades,
     aggTrades,
-    pbd
+    pbd,
   };
 }
 

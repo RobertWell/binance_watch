@@ -2,13 +2,14 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 function QuerySymbol({ symbol, setSymbol, allSymbols }) {
+  
   return (
     <div>
       {allSymbols && allSymbols.length && (
         <Autocomplete
           id="combo-box"
           value={symbol}
-          options={allSymbols.map((d) => d.toLowerCase())}
+          options={allSymbols}
           getOptionLabel={(option) => option}
         //   style={{ width: 300 }}
           onChange={(event, newValue) => setSymbol(newValue)}

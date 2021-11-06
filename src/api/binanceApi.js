@@ -11,4 +11,5 @@ const binance_routes = [
 export const binanceApi = {
   exchangeInfo: () => `${binance_route}/exchangeInfo`,
   aggTrades: () => `${binance_route}/aggTrades`,
+  depth:()=>`${binance_route}/depth`,
 };
