@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/binance_watch/static/css/main.1b297e08.chunk.css",
-    "main.js": "/binance_watch/static/js/main.a047360e.chunk.js",
-    "main.js.map": "/binance_watch/static/js/main.a047360e.chunk.js.map",
-    "runtime-main.js": "/binance_watch/static/js/runtime-main.a164a2a1.js",
-    "runtime-main.js.map": "/binance_watch/static/js/runtime-main.a164a2a1.js.map",
-    "static/js/2.a91c9d24.chunk.js": "/binance_watch/static/js/2.a91c9d24.chunk.js",
-    "static/js/2.a91c9d24.chunk.js.map": "/binance_watch/static/js/2.a91c9d24.chunk.js.map",
-    "static/js/3.ef0a9ad9.chunk.js": "/binance_watch/static/js/3.ef0a9ad9.chunk.js",
-    "static/js/3.ef0a9ad9.chunk.js.map": "/binance_watch/static/js/3.ef0a9ad9.chunk.js.map",
+    "main.css": "/binance_watch/static/css/main.d7460a45.chunk.css",
+    "main.js": "/binance_watch/static/js/main.6afadf5d.chunk.js",
+    "main.js.map": "/binance_watch/static/js/main.6afadf5d.chunk.js.map",
+    "runtime-main.js": "/binance_watch/static/js/runtime-main.6b80cf89.js",
+    "runtime-main.js.map": "/binance_watch/static/js/runtime-main.6b80cf89.js.map",
+    "static/js/2.f0c0fa99.chunk.js": "/binance_watch/static/js/2.f0c0fa99.chunk.js",
+    "static/js/2.f0c0fa99.chunk.js.map": "/binance_watch/static/js/2.f0c0fa99.chunk.js.map",
+    "static/js/3.d5d5690c.chunk.js": "/binance_watch/static/js/3.d5d5690c.chunk.js",
+    "static/js/3.d5d5690c.chunk.js.map": "/binance_watch/static/js/3.d5d5690c.chunk.js.map",
     "index.html": "/binance_watch/index.html",
-    "static/css/main.1b297e08.chunk.css.map": "/binance_watch/static/css/main.1b297e08.chunk.css.map",
-    "static/js/2.a91c9d24.chunk.js.LICENSE.txt": "/binance_watch/static/js/2.a91c9d24.chunk.js.LICENSE.txt",
+    "static/css/main.d7460a45.chunk.css.map": "/binance_watch/static/css/main.d7460a45.chunk.css.map",
+    "static/js/2.f0c0fa99.chunk.js.LICENSE.txt": "/binance_watch/static/js/2.f0c0fa99.chunk.js.LICENSE.txt",
     "static/media/logo.6ce24c58.svg": "/binance_watch/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.a164a2a1.js",
-    "static/js/2.a91c9d24.chunk.js",
-    "static/css/main.1b297e08.chunk.css",
-    "static/js/main.a047360e.chunk.js"
+    "static/js/runtime-main.6b80cf89.js",
+    "static/js/2.f0c0fa99.chunk.js",
+    "static/css/main.d7460a45.chunk.css",
+    "static/js/main.6afadf5d.chunk.js"
   ]
 }

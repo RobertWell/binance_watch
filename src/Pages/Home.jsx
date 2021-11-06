@@ -1,36 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "@material-ui/core";
+import React from "react";
+import { useBinanceSocket } from "../hooks/useBinanceSocket";
+import QuerySymbol from "../Components/Home/QuerySymbol";
+import AggTable from "../Components/Home/AggTable";
+import PartialBookDepthTable from "../Components/Home/PartialBookDepthTable";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Grid } from "@material-ui/core";
 function Home() {
-  const [price, setPrice] = useState("");
-  const [color, setColor] = useState("black");
-  let lastPrice;
-  // useEffect(() => {
-  //   let ws = new WebSocket("wss://stream.binance.com:9443/ws/etheur@trade");
-  //   // ws.onopen(JSON.stringify())
-  //   ws.onmessage = (e) => {
-  //     let stockObj = JSON.parse(e.data);
-
-  //     let p = parseFloat(stockObj.p).toFixed(2);
-  //     setPrice(p);
-  //     if (lastPrice && lastPrice !== p) {
-  //       if (p > lastPrice) setColor("red");
-  //       else setColor("black");
-  //     } else setColor("black");
-  //     lastPrice = p;
-  //     console.log(stockObj, lastPrice);
-  //   };
-
-  //   return () => {
-  //     ws.close("Disconnected");
-  //   };
-  // }, []);
+  const { symbolObj, changeSymbol, allSymbols, aggTrades, pbd } =
+    useBinanceSocket("ETHBTC", 2);
 
   return (
     <div>
-      <h2 style={{ color }}>{price}</h2>
-      <Button color="primary" variant="contained">
-        Hello World
-      </Button>
+      <h2>Binance Watch</h2>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <QuerySymbol
+            symbol={symbolObj.symbol}
+            setSymbol={changeSymbol}
+            allSymbols={allSymbols.map((d) => d.symbol)}
+          />
+        </Grid>
+        <Grid item xs={12} md={6} lg={4}>
+          {pbd && pbd.asks ? (
+            <PartialBookDepthTable pbd={pbd} symbolObj={symbolObj} />
+          ) : (
+            <Grid container justifyContent="center">
+              <Grid item  >
+                <CircularProgress color="secondary" />
+              </Grid>
+              <Grid item xs={12}>
+                <p># Some Products have slow depth response.</p>
+                <p># Please be patient or try something else!</p>
+              </Grid>
+            </Grid>
+          )}
+        </Grid>
+        <Grid item xs={12} md={6} lg={8}>
+          <AggTable aggTrades={aggTrades} symbolObj={symbolObj} />
+        </Grid>
+      </Grid>
     </div>
   );
 }
