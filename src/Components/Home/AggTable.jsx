@@ -10,9 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import TableHeadBar from "./TableHeadBar";
 import { format } from "date-fns";
 const useStyles = makeStyles({
-  table: {
-    //   minWidth: 650,
-  },
+  table: {  },
 });
 
 function AggTable({ aggTrades, symbolObj }) {
@@ -44,9 +42,6 @@ function AggTable({ aggTrades, symbolObj }) {
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={row.a}>
-                {/* <TableCell component="th" scope="row">
-                {i + 1}
-              </TableCell> */}
                 <TableCell component="th" scope="row">
                   {format(new Date(row.T), "HH:mm:ss")}
                 </TableCell>

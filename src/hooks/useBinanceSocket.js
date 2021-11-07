@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { getAllSymbols, getAggTrades } from "../Composables";
+import { getAllSymbols, getAggTrades, getPBD } from "../Composables";
 
 let oldSymbol;
 let socket_address = "wss://stream.binance.com:9443/ws/etheur@trade";
@@ -37,11 +37,11 @@ const subscribe = (ws, s, depth_level, id, ...streamNames) => {
       id,
     };
     ws.send(JSON.stringify(msg));
-    // console.log(msg);
+
   }
 };
 const updateAggTrades = (new_trade, trades, setAggTrades) => {
-  // console.log(new_trade, trades);
+
   trades.push(new_trade);
   trades.splice(0, 1);
   setAggTrades([...trades]);
@@ -50,7 +50,7 @@ const updateAggTrades = (new_trade, trades, setAggTrades) => {
 const bindWs = (ws, trades, setAggTrades, setPBD) => {
   ws.onmessage = (e) => {
     let stockObj = JSON.parse(e.data);
-    // console.log(stockObj);
+
     if (stockObj.e === "aggTrade") {
       updateAggTrades(stockObj, trades, setAggTrades);
     } else if ("asks" in stockObj && "bids" in stockObj) {
@@ -66,13 +66,6 @@ function useBinanceSocket(defaultSymbol, id = 1, depth_level = 10) {
   const [aggTrades, setAggTrades] = useState([]);
   const [pbd, setPBD] = useState({});
 
-  //   const loading = useMemo(() => {
-  //     return aggTrades.length && allSymbols.length;
-  //   }, [aggTrades, allSymbols]);
-
-  const getInitialAggTrades = () => {
-    return getAggTrades(symbolObj.symbol);
-  };
 
   useEffect(() => {
     let ws = new WebSocket(socket_address);
@@ -86,9 +79,13 @@ function useBinanceSocket(defaultSymbol, id = 1, depth_level = 10) {
       changeSymbol(symbolObj.symbol, all_symbols);
     });
 
-    getInitialAggTrades().then((trades) => {
+    getAggTrades(symbolObj.symbol).then((trades) => {
       setAggTrades(trades);
       bindWs(ws, trades, setAggTrades, setPBD);
+    });
+
+    getPBD(symbolObj.symbol).then((p) => {
+      setPBD({ ...p });
     });
 
     return () => {
@@ -99,14 +96,16 @@ function useBinanceSocket(defaultSymbol, id = 1, depth_level = 10) {
 
   useEffect(async () => {
     setAggTrades([]);
-    setPBD({});
+    getPBD(symbolObj.symbol).then((p) => {
+      setPBD({ ...p });
+    });
     if (ws) {
       ws.onmessage = () => {};
       if (oldSymbol)
         unsubscribe(ws, oldSymbol.symbol, depth_level, id, "aggTrade", "depth");
       subscribe(ws, symbolObj.symbol, depth_level, id, "aggTrade", "depth");
       try {
-        let trades = await getInitialAggTrades();
+        let trades = await getAggTrades(symbolObj.symbol);
         setAggTrades(trades);
         bindWs(ws, trades, setAggTrades, setPBD);
       } catch (e) {
@@ -127,7 +126,6 @@ function useBinanceSocket(defaultSymbol, id = 1, depth_level = 10) {
         new_symbol = allSymbols.find(
           (s) => s.symbol === new_symbol_name.toUpperCase()
         );
-      //   console.log("F------new_symbol", new_symbol, allSymbols);
       if (new_symbol) setSymbolObj(new_symbol);
     }
   };
@@ -136,7 +134,6 @@ function useBinanceSocket(defaultSymbol, id = 1, depth_level = 10) {
     symbolObj,
     changeSymbol,
     allSymbols,
-    // loading,
     updateAggTrades,
     aggTrades,
     pbd,

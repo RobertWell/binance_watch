@@ -73,9 +73,6 @@ function PartialBookDepthTable({ pbd, symbolObj }) {
         >
           <TableHead>
             <TableRow>
-              {/* <TableCell>Index</TableCell> */}
-              {/* <TableCell align="right">Time</TableCell> */}
-
               <TableCell align="center">Quotation</TableCell>
               <TableCell align="right">
                 Price&nbsp;({symbolObj.quoteAsset})
